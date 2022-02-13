@@ -16,8 +16,8 @@ import 'package:flutter/material.dart' as _i4;
 import '../pages/detail_page.dart' as _i2;
 import '../pages/homepage.dart' as _i1;
 
-class Router extends _i3.RootStackRouter {
-  Router([_i4.GlobalKey<_i4.NavigatorState>? navigatorKey])
+class AppRouter extends _i3.RootStackRouter {
+  AppRouter([_i4.GlobalKey<_i4.NavigatorState>? navigatorKey])
       : super(navigatorKey);
 
   @override
@@ -29,8 +29,15 @@ class Router extends _i3.RootStackRouter {
           routeData: routeData, child: _i1.HomePage(key: args.key));
     },
     DetailPageRoute.name: (routeData) {
+      final args = routeData.argsAs<DetailPageRouteArgs>();
       return _i3.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i2.DetailPage());
+          routeData: routeData,
+          child: _i2.DetailPage(
+              idNews: args.idNews,
+              titleNews: args.titleNews,
+              image: args.image,
+              author: args.author,
+              caption: args.caption));
     }
   };
 
@@ -63,8 +70,45 @@ class HomePageRouteArgs {
 
 /// generated route for
 /// [_i2.DetailPage]
-class DetailPageRoute extends _i3.PageRouteInfo<void> {
-  const DetailPageRoute() : super(DetailPageRoute.name, path: '/detail-page');
+class DetailPageRoute extends _i3.PageRouteInfo<DetailPageRouteArgs> {
+  DetailPageRoute(
+      {required String idNews,
+      required String titleNews,
+      required String image,
+      required String author,
+      required String caption})
+      : super(DetailPageRoute.name,
+            path: '/detail-page',
+            args: DetailPageRouteArgs(
+                idNews: idNews,
+                titleNews: titleNews,
+                image: image,
+                author: author,
+                caption: caption));
 
   static const String name = 'DetailPageRoute';
+}
+
+class DetailPageRouteArgs {
+  const DetailPageRouteArgs(
+      {required this.idNews,
+      required this.titleNews,
+      required this.image,
+      required this.author,
+      required this.caption});
+
+  final String idNews;
+
+  final String titleNews;
+
+  final String image;
+
+  final String author;
+
+  final String caption;
+
+  @override
+  String toString() {
+    return 'DetailPageRouteArgs{idNews: $idNews, titleNews: $titleNews, image: $image, author: $author, caption: $caption}';
+  }
 }

@@ -8,5 +8,4 @@ import 'package:simple_consume_api/presentation/pages/homepage.dart';
       AutoRoute(page: DetailPage)
     ]
 )
-class $Router {
-}
+class $AppRouter {}
